@@ -27,21 +27,6 @@
     return _typeof(obj);
   }
 
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-
-    return obj;
-  }
-
   function _slicedToArray(arr, i) {
     return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
   }
@@ -8623,15 +8608,18 @@
       // pagination
       paginationOptions: {
         "default": function _default() {
-          var _ref;
-
-          return _ref = {
+          return {
             enabled: false,
-            position: 'bottom',
             perPage: 10,
             perPageDropdown: null,
-            perPageDropdownEnabled: true
-          }, _defineProperty(_ref, "position", 'bottom'), _defineProperty(_ref, "dropdownAllowAll", true), _defineProperty(_ref, "mode", 'records'), _defineProperty(_ref, "infoFn", null), _defineProperty(_ref, "jumpFirstOrLast", false), _ref;
+            perPageDropdownEnabled: true,
+            position: 'bottom',
+            dropdownAllowAll: true,
+            mode: 'records',
+            // or pages
+            infoFn: null,
+            jumpFirstOrLast: false
+          };
         }
       },
       searchOptions: {
@@ -10143,7 +10131,7 @@
             "index": index
           })], 2) : _vm._e();
         })], 2) : _vm._e();
-      }), _vm._v(" "), _vm.groupHeaderOnBottom ? _c('vgt-header-row', {
+      }), _vm._v(" "), _vm._t("after-rows"), _vm._v(" "), _vm.groupHeaderOnBottom ? _c('vgt-header-row', {
         attrs: {
           "header-row": headerRow,
           "columns": _vm.columns,
