@@ -19,7 +19,7 @@
     "docs:build": "vuepress build vp-docs",
     "test": "echo \"No test specified\""
   },
-  "repository": "github:xaksis/vue-good-table",
+  "repository": "github:de-salvatierra/vue-good-table",
   "keywords": [
     "vue",
     "vuejs",
