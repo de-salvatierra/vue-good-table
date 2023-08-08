@@ -308,6 +308,7 @@
               </td>
             </tr>
           </tbody>
+          <slot name="after-tbody"></slot>
         </table>
       </div>
       <div v-if="hasFooterSlot" class="vgt-wrap__actions-footer">
