@@ -3,6 +3,7 @@ import * as decimal from './decimal';
 import * as number from './number';
 import * as percentage from './percentage';
 import * as boolean from './boolean';
+import * as currency from './currency';
 
 export default {
   date,
@@ -10,4 +11,5 @@ export default {
   number,
   percentage,
   boolean,
+  currency,
 };

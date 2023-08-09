@@ -8535,6 +8535,22 @@ number.filterPredicate = function (rowval, filter) {
   return number.compare(rowval, filter) === 0;
 };
 
+number.splitNumberByGroups = function (number) {
+  var numberStr = String(number);
+  var groups = [];
+
+  while (numberStr.length > 0) {
+    groups.unshift(numberStr.slice(-3));
+    numberStr = numberStr.slice(0, -3);
+  }
+
+  return groups.join(' ');
+};
+
+number.format = function (x) {
+  return number.splitNumberByGroups(x);
+};
+
 number.compare = function (x, y) {
   function cook(d) {
     // if d is null or undefined we give it the smallest
@@ -8559,7 +8575,22 @@ var decimal = Object.assign({}, number);
 
 decimal.format = function (v) {
   if (v === undefined || v === null) return '';
-  return parseFloat(Math.round(v * 100) / 100).toFixed(2);
+  var value;
+
+  if (v.toString().includes('.')) {
+    value = parseFloat(Math.round(v * 100) / 100).toFixed(2).toString();
+  } else {
+    value = parseInt(v, 10);
+  }
+
+  var parts = value.toString().split('.');
+  var result = number.splitNumberByGroups(parts[0]);
+
+  if (parts[1]) {
+    result = "".concat(result, ".").concat(parts[1]);
+  }
+
+  return result;
 };
 
 var decimal$1 = /*#__PURE__*/Object.freeze({
@@ -8606,12 +8637,24 @@ var _boolean$1 = /*#__PURE__*/Object.freeze({
   'default': _boolean
 });
 
+var currency = Object.assign({}, decimal);
+
+currency.format = function (x) {
+  return "".concat(decimal.format(x), " \u20BD");
+};
+
+var currency$1 = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  'default': currency
+});
+
 var index = {
   date: date$1,
   decimal: decimal$1,
   number: number$1,
   percentage: percentage$1,
-  "boolean": _boolean$1
+  "boolean": _boolean$1,
+  currency: currency$1
 };
 
 var dataTypes = {};

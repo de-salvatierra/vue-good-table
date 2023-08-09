@@ -8,6 +8,19 @@ number.filterPredicate = function (rowval, filter) {
   return number.compare(rowval, filter) === 0;
 };
 
+number.splitNumberByGroups = function(number) {
+  let numberStr = String(number);
+  const groups = [];
+  while (numberStr.length > 0) {
+    groups.unshift(numberStr.slice(-3));
+    numberStr = numberStr.slice(0, -3);
+  }
+  return groups.join(' ');
+}
+
+number.format = function (x) {
+  return number.splitNumberByGroups(x);
+}
 
 number.compare = function (x, y) {
   function cook(d) {

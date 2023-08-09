@@ -79,7 +79,7 @@ export default {
         {
           label: 'Age',
           field: 'age',
-          type: 'number',
+          type: 'currency',
           tooltip: 'Age tooltip',
           firstSortType: 'desc',
           filterOptions: {
@@ -149,7 +149,7 @@ export default {
         {
           id: 2,
           name: 'Jane',
-          age: 24,
+          age: 243456757.23,
           createdAt: '2011-10-31',
           score: 0.03343,
           bool: true,
