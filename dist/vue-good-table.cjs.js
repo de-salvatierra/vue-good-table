@@ -8602,7 +8602,7 @@ var percentage = Object.assign({}, number);
 
 percentage.format = function (v) {
   if (v === undefined || v === null) return '';
-  return "".concat(parseFloat(v * 100).toFixed(2), "%");
+  return "".concat(v, "%");
 };
 
 var percentage$1 = /*#__PURE__*/Object.freeze({
