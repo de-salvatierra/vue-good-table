@@ -3697,6 +3697,9 @@ var __vue_component__$4 = /*#__PURE__*/normalizeComponent({
 //
 //
 //
+//
+//
+//
 var script$5 = {
   name: 'VgtHeaderRow',
   props: {
@@ -3739,6 +3742,19 @@ var script$5 = {
     return {};
   },
   computed: {
+    hasFixedColumn: function hasFixedColumn() {
+      if (!Array.isArray(this.columns)) {
+        return false;
+      }
+
+      for (var i = 0, iMax = this.columns.length; i < iMax; i++) {
+        if (!!this.columns[i].fixed) {
+          return true;
+        }
+      }
+
+      return false;
+    },
     allSelected: function allSelected() {
       var headerRow = this.headerRow,
           groupChildObject = this.groupChildObject;
@@ -3748,6 +3764,19 @@ var script$5 = {
     }
   },
   methods: {
+    getThClasses: function getThClasses(i, column, type) {
+      var classes = [];
+
+      if (typeof this.getClasses === 'function') {
+        classes.push(this.getClasses(i, type));
+      }
+
+      if (column.fixed) {
+        classes.push('fixed-column');
+      }
+
+      return classes.join(' ');
+    },
     columnCollapsable: function columnCollapsable(currentIndex) {
       if (this.collapsable === true) {
         return currentIndex === 0;
@@ -3779,6 +3808,9 @@ var __vue_render__$5 = function __vue_render__() {
 
   return _c('tr', [_vm.headerRow.mode === 'span' ? _c('th', {
     staticClass: "vgt-left-align vgt-row-header",
+    "class": {
+      'fixed-column': _vm.hasFixedColumn
+    },
     attrs: {
       "colspan": _vm.fullColspan
     }
@@ -3815,9 +3847,15 @@ var __vue_render__$5 = function __vue_render__() {
   }) : _c('span', [_vm._v("\n          " + _vm._s(_vm.headerRow.label) + "\n        ")])], {
     "row": _vm.headerRow
   })], 2)], 2) : _vm._e(), _vm._v(" "), _vm.headerRow.mode !== 'span' && _vm.lineNumbers ? _c('th', {
-    staticClass: "vgt-row-header"
+    staticClass: "vgt-row-header",
+    "class": {
+      'fixed-column': _vm.hasFixedColumn
+    }
   }) : _vm._e(), _vm._v(" "), _vm.headerRow.mode !== 'span' && _vm.selectable ? _c('th', {
-    staticClass: "vgt-row-header"
+    staticClass: "vgt-row-header",
+    "class": {
+      'fixed-column': _vm.hasFixedColumn
+    }
   }, [_vm.selectAllByGroup ? [_vm._t("table-header-group-select", [_c('input', {
     attrs: {
       "type": "checkbox"
@@ -3837,7 +3875,7 @@ var __vue_render__$5 = function __vue_render__() {
     return _vm.headerRow.mode !== 'span' && !column.hidden ? _c('th', {
       key: i,
       staticClass: "vgt-row-header",
-      "class": _vm.getClasses(i, 'td'),
+      "class": _vm.getThClasses(i, column, 'td'),
       on: {
         "click": function click($event) {
           _vm.columnCollapsable(i) ? _vm.$emit('vgtExpand', !_vm.headerRow.vgtIsExpanded) : function () {};

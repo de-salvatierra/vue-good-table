@@ -3,6 +3,7 @@
   <th
     v-if="headerRow.mode === 'span'"
     class="vgt-left-align vgt-row-header"
+    :class="{'fixed-column': hasFixedColumn}"
     :colspan="fullColspan"
     >
     <template v-if="selectAllByGroup">
@@ -32,9 +33,11 @@
   <!-- if the mode is not span, we display every column -->
   <th
     class="vgt-row-header"
+    :class="{'fixed-column': hasFixedColumn}"
     v-if="headerRow.mode !== 'span' && lineNumbers"></th>
   <th
     class="vgt-row-header"
+    :class="{'fixed-column': hasFixedColumn}"
     v-if="headerRow.mode !== 'span' && selectable">
     <template v-if="selectAllByGroup"
     >
@@ -54,7 +57,7 @@
     v-for="(column, i) in columns"
     :key="i"
     class="vgt-row-header"
-    :class="getClasses(i, 'td')"
+    :class="getThClasses(i, column, 'td')"
     @click="columnCollapsable(i) ? $emit('vgtExpand', !headerRow.vgtIsExpanded) : () => {}">
     <span v-if="columnCollapsable(i)" class="triangle" :class="{ 'expand': headerRow.vgtIsExpanded }"></span>
     <slot
@@ -116,12 +119,33 @@ export default {
     };
   },
   computed: {
+    hasFixedColumn() {
+      if (!Array.isArray(this.columns)) {
+        return false;
+      }
+      for (let i = 0, iMax = this.columns.length; i < iMax; i++) {
+        if (!!this.columns[i].fixed) {
+          return true;
+        }
+      }
+      return false;
+    },
     allSelected() {
       const { headerRow, groupChildObject } = this;
       return headerRow.children.filter((row) => row.vgtSelected).length === headerRow.children.length;
     }
   },
   methods: {
+    getThClasses(i, column, type) {
+      const classes = [];
+      if (typeof this.getClasses === 'function') {
+        classes.push(this.getClasses(i, type));
+      }
+      if (column.fixed) {
+        classes.push('fixed-column');
+      }
+      return classes.join(' ');
+    },
     columnCollapsable(currentIndex) {
       if (this.collapsable === true) {
         return currentIndex === 0;
