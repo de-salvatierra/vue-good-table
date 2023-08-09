@@ -3427,6 +3427,7 @@
       getHeaderClasses: function getHeaderClasses(column, index) {
         var classes = Object.assign({}, this.getClasses(index, 'th'), {
           sortable: this.isSortableColumn(column),
+          'fixed-column': this.hasFixedColumn,
           'sorting sorting-desc': this.getColumnSort(column) === 'desc',
           'sorting sorting-asc': this.getColumnSort(column) === 'asc'
         });
@@ -8828,6 +8829,19 @@
       }
     },
     computed: {
+      hasFixedColumn: function hasFixedColumn() {
+        if (!Array.isArray(this.columns)) {
+          return false;
+        }
+
+        for (var i = 0, iMax = this.columns.length; i < iMax; i++) {
+          if (!!this.columns[i].fixed) {
+            return true;
+          }
+        }
+
+        return false;
+      },
       tableStyles: function tableStyles() {
         if (this.compactMode) return this.tableStyleClasses + 'vgt-compact';else return this.tableStyleClasses;
       },
@@ -10175,9 +10189,15 @@
             }
           }
         }, [_vm.lineNumbers ? _c('th', {
-          staticClass: "line-numbers"
+          staticClass: "line-numbers",
+          "class": {
+            'fixed-column': this.hasFixedColumn
+          }
         }, [_vm._v("\n              " + _vm._s(_vm.getCurrentIndex(row.originalIndex)) + "\n            ")]) : _vm._e(), _vm._v(" "), _vm.selectable ? _c('th', {
           staticClass: "vgt-checkbox-col",
+          "class": {
+            'fixed-column': this.hasFixedColumn
+          },
           on: {
             "click": function click($event) {
               $event.stopPropagation();

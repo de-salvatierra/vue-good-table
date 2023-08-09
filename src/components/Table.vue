@@ -228,6 +228,7 @@
               <th
                 v-if="lineNumbers"
                 class="line-numbers"
+                :class="{'fixed-column': this.hasFixedColumn}"
               >
                 {{ getCurrentIndex(row.originalIndex) }}
               </th>
@@ -235,6 +236,7 @@
                 v-if="selectable"
                 @click.stop="onCheckboxClicked(row, index, $event)"
                 class="vgt-checkbox-col"
+                :class="{'fixed-column': this.hasFixedColumn}"
               >
                 <input
                   type="checkbox"
@@ -577,6 +579,17 @@ export default {
   },
 
   computed: {
+    hasFixedColumn() {
+      if (!Array.isArray(this.columns)) {
+        return false;
+      }
+      for (let i = 0, iMax = this.columns.length; i < iMax; i++) {
+        if (!!this.columns[i].fixed) {
+          return true;
+        }
+      }
+      return false;
+    },
     tableStyles() {
       if (this.compactMode)
         return this.tableStyleClasses + 'vgt-compact'
