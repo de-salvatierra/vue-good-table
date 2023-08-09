@@ -2981,6 +2981,19 @@ var script$3 = {
     };
   },
   computed: {
+    hasFixedColumn: function hasFixedColumn() {
+      if (!Array.isArray(this.columns)) {
+        return false;
+      }
+
+      for (var i = 0, iMax = this.columns.length; i < iMax; i++) {
+        if (!!this.columns[i].fixed) {
+          return true;
+        }
+      }
+
+      return false;
+    },
     // to create a filter row, we need to
     // make sure that there is atleast 1 column
     // that requires filtering
@@ -3028,6 +3041,11 @@ var script$3 = {
     },
     getClasses: function getClasses(column) {
       var firstClass = 'filter-th';
+
+      if (column.fixed) {
+        firstClass = "".concat(firstClass, " headcol");
+      }
+
       return column.filterOptions && column.filterOptions.styleClass ? [firstClass].concat(_toConsumableArray(column.filterOptions.styleClass.split(' '))).join(' ') : firstClass;
     },
     // get column's defined placeholder or default one
@@ -3098,7 +3116,15 @@ var __vue_render__$3 = function __vue_render__() {
 
   var _c = _vm._self._c || _h;
 
-  return _vm.hasFilterRow ? _c('tr', [_vm.lineNumbers ? _c('th') : _vm._e(), _vm._v(" "), _vm.selectable ? _c('th') : _vm._e(), _vm._v(" "), _vm._l(_vm.columns, function (column, index) {
+  return _vm.hasFilterRow ? _c('tr', [_vm.lineNumbers ? _c('th', {
+    "class": {
+      headcol: _vm.hasFixedColumn
+    }
+  }) : _vm._e(), _vm._v(" "), _vm.selectable ? _c('th', {
+    "class": {
+      headcol: _vm.hasFixedColumn
+    }
+  }) : _vm._e(), _vm._v(" "), _vm._l(_vm.columns, function (column, index) {
     return !column.hidden ? _c('th', {
       key: index,
       "class": _vm.getClasses(column)
@@ -3187,7 +3213,7 @@ var __vue_staticRenderFns__$3 = [];
 var __vue_inject_styles__$3 = undefined;
 /* scoped */
 
-var __vue_scope_id__$3 = "data-v-6869bf1c";
+var __vue_scope_id__$3 = "data-v-0f86cd10";
 /* module identifier */
 
 var __vue_module_identifier__$3 = undefined;
@@ -3341,7 +3367,21 @@ var script$4 = {
       ro: null
     };
   },
-  computed: {},
+  computed: {
+    hasFixedColumn: function hasFixedColumn() {
+      if (!Array.isArray(this.columns)) {
+        return false;
+      }
+
+      for (var i = 0, iMax = this.columns.length; i < iMax; i++) {
+        if (!!this.columns[i].fixed) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+  },
   methods: {
     reset: function reset() {
       this.$refs['filter-row'].reset(true);
@@ -3490,11 +3530,17 @@ var __vue_render__$4 = function __vue_render__() {
 
   return _c('thead', [_c('tr', [_vm.lineNumbers ? _c('th', {
     staticClass: "line-numbers",
+    "class": {
+      headcol: _vm.hasFixedColumn
+    },
     attrs: {
       "scope": "col"
     }
   }) : _vm._e(), _vm._v(" "), _vm.selectable ? _c('th', {
     staticClass: "vgt-checkbox-col",
+    "class": {
+      headcol: _vm.hasFixedColumn
+    },
     attrs: {
       "scope": "col"
     }

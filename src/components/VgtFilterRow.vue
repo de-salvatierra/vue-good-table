@@ -1,7 +1,7 @@
 <template>
 <tr v-if="hasFilterRow">
-  <th v-if="lineNumbers"></th>
-  <th v-if="selectable"></th>
+  <th v-if="lineNumbers" :class="{headcol: hasFixedColumn}"></th>
+  <th v-if="selectable" :class="{headcol: hasFixedColumn}"></th>
   <th
     v-for="(column, index) in columns" :key="index"
     v-if="!column.hidden"
@@ -87,7 +87,17 @@ export default {
     };
   },
   computed: {
-
+    hasFixedColumn() {
+      if (!Array.isArray(this.columns)) {
+        return false;
+      }
+      for (let i = 0, iMax = this.columns.length; i < iMax; i++) {
+        if (!!this.columns[i].fixed) {
+          return true;
+        }
+      }
+      return false;
+    },
     // to create a filter row, we need to
     // make sure that there is atleast 1 column
     // that requires filtering
@@ -142,7 +152,10 @@ export default {
     },
 
     getClasses(column) {
-      const firstClass = 'filter-th';
+      let firstClass = 'filter-th';
+      if (column.fixed) {
+        firstClass = `${firstClass} headcol`;
+      }
       return (column.filterOptions && column.filterOptions.styleClass) ? [firstClass, ...column.filterOptions.styleClass.split(' ')].join(' ') : firstClass;
     },
 

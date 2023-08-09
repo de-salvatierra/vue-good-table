@@ -1,8 +1,8 @@
 <template>
 <thead>
   <tr>
-    <th scope="col" v-if="lineNumbers" class="line-numbers"></th>
-    <th scope="col" v-if="selectable" class="vgt-checkbox-col">
+    <th scope="col" v-if="lineNumbers" class="line-numbers" :class="{headcol: hasFixedColumn}"></th>
+    <th scope="col" v-if="selectable" class="vgt-checkbox-col" :class="{headcol: hasFixedColumn}">
       <input
         type="checkbox"
         :checked="allSelected"
@@ -140,7 +140,17 @@ export default {
     };
   },
   computed: {
-
+    hasFixedColumn() {
+      if (!Array.isArray(this.columns)) {
+        return false;
+      }
+      for (let i = 0, iMax = this.columns.length; i < iMax; i++) {
+        if (!!this.columns[i].fixed) {
+          return true;
+        }
+      }
+      return false;
+    },
   },
   methods: {
     reset() {
