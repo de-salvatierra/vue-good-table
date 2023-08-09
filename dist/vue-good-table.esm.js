@@ -3039,7 +3039,7 @@ var script$3 = {
       var firstClass = 'filter-th';
 
       if (column.fixed) {
-        firstClass = "".concat(firstClass, " headcol");
+        firstClass = "".concat(firstClass, " fixed-column");
       }
 
       return column.filterOptions && column.filterOptions.styleClass ? [firstClass].concat(_toConsumableArray(column.filterOptions.styleClass.split(' '))).join(' ') : firstClass;
@@ -3114,11 +3114,11 @@ var __vue_render__$3 = function __vue_render__() {
 
   return _vm.hasFilterRow ? _c('tr', [_vm.lineNumbers ? _c('th', {
     "class": {
-      headcol: _vm.hasFixedColumn
+      'fixed-column': _vm.hasFixedColumn
     }
   }) : _vm._e(), _vm._v(" "), _vm.selectable ? _c('th', {
     "class": {
-      headcol: _vm.hasFixedColumn
+      'fixed-column': _vm.hasFixedColumn
     }
   }) : _vm._e(), _vm._v(" "), _vm._l(_vm.columns, function (column, index) {
     return !column.hidden ? _c('th', {
@@ -3209,7 +3209,7 @@ var __vue_staticRenderFns__$3 = [];
 var __vue_inject_styles__$3 = undefined;
 /* scoped */
 
-var __vue_scope_id__$3 = "data-v-0f86cd10";
+var __vue_scope_id__$3 = "data-v-7e727041";
 /* module identifier */
 
 var __vue_module_identifier__$3 = undefined;
@@ -3527,7 +3527,7 @@ var __vue_render__$4 = function __vue_render__() {
   return _c('thead', [_c('tr', [_vm.lineNumbers ? _c('th', {
     staticClass: "line-numbers",
     "class": {
-      headcol: _vm.hasFixedColumn
+      'fixed-column': _vm.hasFixedColumn
     },
     attrs: {
       "scope": "col"
@@ -3535,7 +3535,7 @@ var __vue_render__$4 = function __vue_render__() {
   }) : _vm._e(), _vm._v(" "), _vm.selectable ? _c('th', {
     staticClass: "vgt-checkbox-col",
     "class": {
-      headcol: _vm.hasFixedColumn
+      'fixed-column': _vm.hasFixedColumn
     },
     attrs: {
       "scope": "col"

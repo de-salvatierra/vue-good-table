@@ -1,7 +1,7 @@
 <template>
 <tr v-if="hasFilterRow">
-  <th v-if="lineNumbers" :class="{headcol: hasFixedColumn}"></th>
-  <th v-if="selectable" :class="{headcol: hasFixedColumn}"></th>
+  <th v-if="lineNumbers" :class="{'fixed-column': hasFixedColumn}"></th>
+  <th v-if="selectable" :class="{'fixed-column': hasFixedColumn}"></th>
   <th
     v-for="(column, index) in columns" :key="index"
     v-if="!column.hidden"
@@ -154,7 +154,7 @@ export default {
     getClasses(column) {
       let firstClass = 'filter-th';
       if (column.fixed) {
-        firstClass = `${firstClass} headcol`;
+        firstClass = `${firstClass} fixed-column`;
       }
       return (column.filterOptions && column.filterOptions.styleClass) ? [firstClass, ...column.filterOptions.styleClass.split(' ')].join(' ') : firstClass;
     },

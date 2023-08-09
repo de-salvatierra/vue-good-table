@@ -1,8 +1,8 @@
 <template>
 <thead>
   <tr>
-    <th scope="col" v-if="lineNumbers" class="line-numbers" :class="{headcol: hasFixedColumn}"></th>
-    <th scope="col" v-if="selectable" class="vgt-checkbox-col" :class="{headcol: hasFixedColumn}">
+    <th scope="col" v-if="lineNumbers" class="line-numbers" :class="{'fixed-column': hasFixedColumn}"></th>
+    <th scope="col" v-if="selectable" class="vgt-checkbox-col" :class="{'fixed-column': hasFixedColumn}">
       <input
         type="checkbox"
         :checked="allSelected"
