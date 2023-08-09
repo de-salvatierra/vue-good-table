@@ -228,7 +228,7 @@
               <th
                 v-if="lineNumbers"
                 class="line-numbers"
-                :class="{'fixed-column': this.hasFixedColumn}"
+                :class="{'fixed-column': hasFixedColumn}"
               >
                 {{ getCurrentIndex(row.originalIndex) }}
               </th>
@@ -236,7 +236,7 @@
                 v-if="selectable"
                 @click.stop="onCheckboxClicked(row, index, $event)"
                 class="vgt-checkbox-col"
-                :class="{'fixed-column': this.hasFixedColumn}"
+                :class="{'fixed-column': hasFixedColumn}"
               >
                 <input
                   type="checkbox"
