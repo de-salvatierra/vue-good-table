@@ -8644,13 +8644,25 @@ var currency$1 = /*#__PURE__*/Object.freeze({
   'default': currency
 });
 
+var piece = Object.assign({}, number);
+
+piece.format = function (x) {
+  return "".concat(number.splitNumberByGroups(x), " \u0448\u0442.");
+};
+
+var piece$1 = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  'default': piece
+});
+
 var index = {
   date: date$1,
   decimal: decimal$1,
   number: number$1,
   percentage: percentage$1,
   "boolean": _boolean$1,
-  currency: currency$1
+  currency: currency$1,
+  piece: piece$1
 };
 
 var dataTypes = {};

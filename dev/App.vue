@@ -79,7 +79,7 @@ export default {
         {
           label: 'Age',
           field: 'age',
-          type: 'currency',
+          type: 'piece',
           tooltip: 'Age tooltip',
           firstSortType: 'desc',
           filterOptions: {

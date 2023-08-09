@@ -4,6 +4,7 @@ import * as number from './number';
 import * as percentage from './percentage';
 import * as boolean from './boolean';
 import * as currency from './currency';
+import * as piece from './piece';
 
 export default {
   date,
@@ -12,4 +13,5 @@ export default {
   percentage,
   boolean,
   currency,
+  piece,
 };
