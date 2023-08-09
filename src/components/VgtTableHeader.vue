@@ -199,7 +199,7 @@ export default {
     getHeaderClasses(column, index) {
       const classes = Object.assign({}, this.getClasses(index, 'th'), {
         sortable: this.isSortableColumn(column),
-        'fixed-column': this.hasFixedColumn,
+        'fixed-column': column.fixed,
         'sorting sorting-desc': this.getColumnSort(column) === 'desc',
         'sorting sorting-asc': this.getColumnSort(column) === 'asc',
       });
